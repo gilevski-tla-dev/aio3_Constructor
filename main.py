@@ -4,6 +4,8 @@ from core.handlers.basic import *
 from core.settings import settings
 from aiogram.filters import Text, Command 
 from core.utils.commands import set_commands
+from core.handlers import form
+from core.utils.statesform import States
 
 import asyncio
 import logging
@@ -21,11 +23,12 @@ async def start():
     dp.startup.register(start_bot)
     
     dp.message.register(get_start, Command(commands=['start']))
-    dp.message.register(get_start, Command(commands=['new_post']))
-    dp.message.register(get_start, Text('Создать новый пост'))
-
     dp.message.register(descr_command, Command(commands='description'))
     
+    dp.message.register(form.get_form, Command(commands='new_post'))
+    dp.message.register(form.get_postname, States.GET_POSTNAME)
+    dp.message.register(form.get_text, States.GET_TEXT)
+    dp.message.register(form.get_photo, States.GET_PHOTO)
 
     try:
         await dp.start_polling(bot)
