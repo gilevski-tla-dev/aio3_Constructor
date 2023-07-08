@@ -19,7 +19,7 @@ async def get_text(message: Message, state: FSMContext):
     await state.set_state(States.GET_PHOTO)
 
 async def check_photo(message: Message):
-    await message.reply('Это не фото!')
+        await message.reply('Это не фото!')
 
 async def get_photo(message: Message, state: FSMContext):
     await state.update_data(photo=message.photo[0].file_id)

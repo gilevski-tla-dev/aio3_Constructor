@@ -1,11 +1,12 @@
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, ContentType
 from core.handlers.basic import *
 from core.settings import settings
-from aiogram.filters import Text, Command 
+from aiogram.filters import Text, Command
 from core.utils.commands import set_commands
 from core.handlers import form
 from core.utils.statesform import States
+
 
 import asyncio
 import logging
@@ -28,7 +29,7 @@ async def start():
     dp.message.register(form.get_form, Command(commands='new_post'))
     dp.message.register(form.get_postname, States.GET_POSTNAME)
     dp.message.register(form.get_text, States.GET_TEXT)
-    dp.message.register(form.check_photo, ContentType.PHOTO, States.GET_PHOTO)
+    dp.message.register(form.check_photo, lambda message: not message.photo)
     dp.message.register(form.get_photo, States.GET_PHOTO)
     
 
