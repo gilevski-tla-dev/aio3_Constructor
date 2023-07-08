@@ -2,6 +2,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from core.utils.statesform import States
 
+
 async def get_form(message: Message, state: FSMContext):
     await message.answer('Начинаем создание поста... Введите заголовок!')
     await state.set_state(States.GET_POSTNAME)
@@ -17,13 +18,15 @@ async def get_text(message: Message, state: FSMContext):
     await state.update_data(text=message.text)
     await state.set_state(States.GET_PHOTO)
 
+async def check_photo(message: Message):
+    await message.reply('Это не фото!')
+
 async def get_photo(message: Message, state: FSMContext):
     await state.update_data(photo=message.photo[0].file_id)
-    context_data = await state.get_data()
-    post_name = context_data.get('name')
-    post_text = context_data.get('text')
-    post_photo = context_data.get('photo')
-    await message.answer(f"Твой пост с заголовком <<{str.upper(post_name)}>> будет выглядеть так:")
-    # await message.answer_photo(post_photo, caption=post_text)
-
+    data = await state.get_data()
+    name = data.get("name")
+    text = data.get("text")
+    photo = data.get("photo")
+    await message.answer(f'<u><b>Ваш сайт готов!</b></u>\n\nПроверьте, верен ли заголовок: <u><b>{str.upper(name)}.</b></u>\n\nА вот информация, которая появится на нем: \n\n')
+    await message.answer_photo(photo, caption=text)
     await state.clear()

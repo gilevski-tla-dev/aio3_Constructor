@@ -1,5 +1,5 @@
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message
+from aiogram.types import Message, ContentType
 from core.handlers.basic import *
 from core.settings import settings
 from aiogram.filters import Text, Command 
@@ -28,7 +28,9 @@ async def start():
     dp.message.register(form.get_form, Command(commands='new_post'))
     dp.message.register(form.get_postname, States.GET_POSTNAME)
     dp.message.register(form.get_text, States.GET_TEXT)
+    dp.message.register(form.check_photo, ContentType.PHOTO, States.GET_PHOTO)
     dp.message.register(form.get_photo, States.GET_PHOTO)
+    
 
     try:
         await dp.start_polling(bot)
