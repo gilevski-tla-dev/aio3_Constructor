@@ -25,14 +25,15 @@ async def start():
     
     dp.message.register(get_start, Command(commands=['start']))
     dp.message.register(descr_command, Command(commands='description'))
-    
     dp.message.register(form.get_form, Command(commands='new_post'))
+
+
     dp.message.register(form.get_postname, States.GET_POSTNAME)
     dp.message.register(form.get_text, States.GET_TEXT)
     dp.message.register(form.check_photo, lambda message: not message.photo)
     dp.message.register(form.get_photo, States.GET_PHOTO)
     
-
+    
     try:
         await dp.start_polling(bot)
     finally:

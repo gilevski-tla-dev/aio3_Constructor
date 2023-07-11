@@ -7,7 +7,6 @@ async def get_form(message: Message, state: FSMContext):
     await message.answer('Начинаем создание поста... Введите заголовок!')
     await state.set_state(States.GET_POSTNAME)
 
-
 async def get_postname(message: Message, state: FSMContext):
     await message.answer('Теперь введи текст поста.')
     await state.update_data(name=message.text)
@@ -27,6 +26,6 @@ async def get_photo(message: Message, state: FSMContext):
     name = data.get("name")
     text = data.get("text")
     photo = data.get("photo")
-    await message.answer(f'<u><b>Ваш сайт готов!</b></u>\n\nПроверьте, верен ли заголовок: <u><b>{str.upper(name)}.</b></u>\n\nА вот информация, которая появится на нем: \n\n')
+    await message.answer(f'<u><b>Ваш пост готов!</b></u>\n\nПроверьте, верно ли введен заголовок: <u><b>{str.upper(name)}</b></u>\n\nА вот информация, которая появится на нем: \n\n')
     await message.answer_photo(photo, caption=text)
     await state.clear()
