@@ -6,4 +6,4 @@ reply_keyboard = ReplyKeyboardMarkup(keyboard=[
             text='Создать новый пост'
         )
     ]
-], resize_keyboard=True, one_time_keyboard=True)
+], resize_keyboard=True, one_time_keyboard=True, input_field_placeholder='Выбери кнопку снизу')
