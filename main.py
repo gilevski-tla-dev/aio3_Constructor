@@ -1,4 +1,4 @@
-from aiogram import Bot, Dispatcher, F
+from aiogram import Bot, Dispatcher
 from aiogram.types import Message, ContentType
 from core.handlers.basic import *
 from core.settings import settings
