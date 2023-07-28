@@ -29,7 +29,8 @@ async def start():
     dp.message.register(get_start, Command(commands=['start']))
     dp.message.register(descr_command, Command(commands='description'))
     dp.message.register(form.get_form, Command(commands='new_post'))
-    dp.message.register(form.get_form, Text('Создать новый пост'))
+    # НЕ РАБОТАЕТ
+    dp.message.register(form.get_form, Text('Создать новый пост')) 
 
 
     dp.message.register(form.get_postname, States.GET_POSTNAME)
