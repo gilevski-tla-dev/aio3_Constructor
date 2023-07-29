@@ -1,8 +1,8 @@
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, ContentType
 from core.handlers.basic import *
 from core.settings import settings
-from aiogram.filters import Text, Command
+from aiogram.filters import Command
 from core.utils.commands import set_commands
 from core.handlers import form
 from core.utils.statesform import States
@@ -29,8 +29,7 @@ async def start():
     dp.message.register(get_start, Command(commands=['start']))
     dp.message.register(descr_command, Command(commands='description'))
     dp.message.register(form.get_form, Command(commands='new_post'))
-    # НЕ РАБОТАЕТ
-    dp.message.register(form.get_form, Text('Создать новый пост')) 
+    dp.message.register(form.get_form, F.text == 'Создать новый пост')
 
 
     dp.message.register(form.get_postname, States.GET_POSTNAME)
